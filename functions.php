@@ -1,5 +1,7 @@
 <?php
 
+require "./dijkstra.php";
+
 /**
  * Parses file putting lines into array
  *
@@ -88,4 +90,9 @@ function formulaVincenty($coordinatesA, $coordinatesB)
     $distance = $b * $A * ($a - $Da);
 
     return $distance;
+}
+
+function sortByDistance($array1, $array2)
+{
+    return $array1[0] - $array2[0];
 }
