@@ -24,7 +24,30 @@ function parseFile($fileName = "cities.txt")
     return $info;
 }
 
+function getGraphOfDistances($citiesCoordinates)
+{
+    foreach ($citiesCoordinates as $cityCoordinates1) {
+        foreach ($citiesCoordinates as $cityCoordinates2) {
+            $city1 = $cityCoordinates1[0];
+            $city2 = $cityCoordinates2[0];
+            $coordinates1 = array($cityCoordinates1[1], $cityCoordinates1[2]);
+            $coordinates2 = array($cityCoordinates2[1], $cityCoordinates2[2]);
+            $graph[$city1][$city2] = formulaVincenty($coordinates1, $coordinates2);
+        }
+    }
 
+    return $graph;
+}
+
+/**
+ * Vincenty formula which calculates between two points
+ * of the surface of an ellipsoid of revolution. It's used the
+ * WSG84 ellipsoide as model of earth.
+ *
+ * @param $coordinatesA
+ * @param $coordinatesB
+ * @return float|int
+ */
 function formulaVincenty($coordinatesA, $coordinatesB)
 {
     $a = 6378137; // length of semi-major axis of the ellipsoid (radius at equator);
@@ -64,5 +87,5 @@ function formulaVincenty($coordinatesA, $coordinatesB)
                     ))));
     $distance = $b * $A * ($a - $Da);
 
-    var_dump($distance);
+    return $distance;
 }
